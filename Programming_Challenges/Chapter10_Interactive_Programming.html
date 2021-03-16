@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mousemove</title>
+</head>
+<body>
+<h1 id="heading">Hello World!</h1>
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+<script>
+
+    // #1-4
+
+    /* $("html").click(function (event) {
+        $("#heading").offset({
+            left: event.pageX,
+            top: event.pageY
+        });
+    }); */
+
+    let direction = "right";
+    let offset= 0;
+    let intervalTime = 100;
+    let numberOfClicks = 0;
+
+    $("#heading").offset({ left: offset, top: offset });
+
+    let moveHeading = function () {
+        if (direction === "right") {
+            $("h1").offset({left : offset});
+            offset++;
+            if (offset > 200) {
+                direction = "down";
+                offset = 0;
+            }
+        } else if (direction === "down") {
+            $("h1").offset({top : offset});
+            offset++;
+            if (offset > 200) {
+                direction = "left";
+            }
+        } else if (direction === "left") {
+            $("h1").offset({left : offset});
+            offset--;
+            if (offset < 0) {
+                direction = "up";
+                offset = 200;
+            }
+        } else {
+            $("h1").offset({top : offset});
+            offset--;
+            if (offset < 0) {
+                direction = "right";
+            }
+        }
+    };
+
+    let intervalId = setInterval(moveHeading, intervalTime);
+
+    $("#heading").click(function () {
+    clearInterval(intervalId);
+    intervalTime /= 2;
+    numberOfClicks++;
+
+    if (numberOfClicks > 10) {
+        $("#heading").text("You Win.");
+    } else {
+        intervalId = setInterval(moveHeading, intervalTime);
+        $("#heading").text("Number of clicks is " + numberOfClicks);
+    }
+    });
+
+</script>
+</body>
+</html>
+

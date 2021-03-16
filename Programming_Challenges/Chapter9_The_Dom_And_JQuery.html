@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Playing with the DOM</title>
+</head>
+<body>
+<h1 id="main-heading">Hello World!</h1>
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+<script>
+
+// #1-5
+
+    $("#main-heading").text("My friends");
+    let friends = ["Gala", "Pavel", "Sveta", "Amanda", "Asli"];
+    for (let i = 0; i < friends.length; i++) {
+        $("body").append("<p>" + friends[i] + "</p>");
+    }
+    $("p").append(" smells!");
+    for (let j = 0; j<=5; j++) {
+        let fadeTime = (j + 1) * 1000
+        $("#main-heading").fadeOut(fadeTime).fadeIn(fadeTime);
+    }
+    // $("p").fadeOut(1000).delay(4000).fadeIn(1000);
+    $("p").fadeTo(2000, 0.1);
+
+</script>
+</body>
+</html>

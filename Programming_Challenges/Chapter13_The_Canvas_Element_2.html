@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+</head>
+<body>
+
+<canvas id="canvas" width="1000" height="1000"></canvas>
+
+<script>
+
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+    ctx.fillRect(40, 40, 50, 50);
+    ctx.fillRect(60, 90, 10, 20);
+    ctx.fillRect(10, 110, 110, 10);
+    ctx.fillRect(30, 120, 70, 60);
+    ctx.fillRect(30, 180, 10, 40);
+    ctx.fillRect(90, 180, 10, 40);
+
+</script>
+
+</body>
+</html>

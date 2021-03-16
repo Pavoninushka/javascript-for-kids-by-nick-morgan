@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+<script>
+
+    let Car = function(x,y) {
+        this.x = x;
+        this.y = y;
+
+        this.draw();
+    };
+
+    Car.prototype.draw = function () {
+        let carHtml = "<img src='car.png'>";
+
+        this.carElement = $(carHtml);
+
+        this.carElement.css({
+            position: "absolute",
+            left: this.x,
+            top: this.y
+        });
+
+        $("body").append(this.carElement);
+    };
+
+    Car.prototype.moveRight = function(distance) {
+        this.x += distance;
+
+        this.carElement.css({
+            left: this.x,
+            top: this.y
+        });
+    };
+
+    Car.prototype.moveLeft = function(distance) {
+        this.x -= distance;
+
+        this.carElement.css({
+            left: this.x,
+            top: this.y
+        });
+    };
+
+    Car.prototype.moveUp = function(distance) {
+        this.y -= distance;
+
+        this.carElement.css({
+            left: this.x,
+            top: this.y
+        });
+    };
+
+    Car.prototype.moveDown = function(distance) {
+        this.y += distance;
+
+        this.carElement.css({
+            left: this.x,
+            top: this.y
+        });
+    };
+
+    let tesla = new Car(20,20);
+    let nissan = new Car(100, 200);
+
+    let teslaInterval = setInterval(function() {
+        tesla.moveRight(1)}, 30);
+
+    let nissanInterval = setInterval(function() {
+        nissan.moveRight(5)},30);
+
+
+
+</script>
+</body>
+</html>

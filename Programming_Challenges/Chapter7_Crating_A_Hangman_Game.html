@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hangman!</title>
+</head>
+<body>
+<h1>Hangman!</h1>
+<script>
+
+    // #1, 2, ,3, 4
+
+   let words = [
+       "cat",
+       "javascript",
+       "coding",
+       "pavel",
+       "mamma"
+   ];
+
+   let word = words[Math.floor(Math.random() * words.length)];
+
+   let answerArray = [];
+   for (let i = 0; i < word.length; i++) {
+       answerArray[i] = "_";
+   }
+
+   let remainingLetters = word.length;
+   let numberOfGuesses = 5;
+
+   while (remainingLetters > 0 && numberOfGuesses > 0) {
+       alert(answerArray.join(" "));
+
+       let guess = prompt("Guess a letter, or click Cancel to stop playing.");
+
+       if (guess === null) {
+           break;
+       } else if (guess.length !== 1) {
+           alert("Please enter a single letter.");
+       } else {
+           guess = guess.toLowerCase()
+           let isFound = false;
+           for (let j = 0; j < word.length; j++) {
+             if (word[j] === guess && answerArray[j] === "_") {
+                   answerArray[j] = guess;
+                   remainingLetters--;
+                   isFound = true;
+               }
+           }
+           if (!isFound) {
+               numberOfGuesses--;
+           }
+       }
+   }
+
+    if (numberOfGuesses > 0) {
+        alert("Good job! The answer was " + word);
+    } else {
+        alert("Too bad! The answer was " + word);
+    }
+
+</script>
+</body>
+</html>
