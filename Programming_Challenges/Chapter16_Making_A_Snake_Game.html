@@ -41,7 +41,7 @@
     };
 
     let gameOver = function () {
-      clearInterval(intervalId);
+      playing = false;
       ctx.font = "60px Courier";
       ctx.fillStyle = "Black";
       ctx.textAlign = "center";
@@ -133,7 +133,8 @@
 
       if(newHead.equal(apple.position)) {
         score++;
-        apple.move();
+        animationTime -= 5;
+        apple.move(this.segments);
       } else {
         this.segments.pop();
       }
@@ -179,23 +180,48 @@
       this.position.drawCircle("LimeGreen")
     };
 
-    Apple.prototype.move = function () {
+    Apple.prototype.move = function (occupiedSegments) {
       let randomCol = Math.floor(Math.random() * (widthInBlocks - 2)) + 1;
       let randomRow = Math.floor(Math.random() * (heightInBlocks - 2)) + 1;
       this.position = new Block(randomCol, randomRow);
+
+      for (let i = 0; i < occupiedSegments.length; i++) {
+        if(this.position.equal(occupiedSegments[i])){
+          this.move(occupiedSegments);
+          return;
+        }
+      }
     };
 
     let snake = new Snake();
     let apple = new Apple();
 
-    let intervalId = setInterval(function() {
+    let playing = true;
+    let animationTime = 100;
+
+    let gameLoop = function () {
       ctx.clearRect(0, 0, width, height);
       drawScore();
       snake.move();
       snake.draw();
       apple.draw();
       drawBorder();
-    }, 100);
+
+      if (playing) {
+      setTimeout(gameLoop, animationTime);
+      }
+    };
+
+    gameLoop();
+
+    // let intervalId = setInterval(function() {
+    //   ctx.clearRect(0, 0, width, height);
+    //   drawScore();
+    //   snake.move();
+    //   snake.draw();
+    //   apple.draw();
+    //   drawBorder();
+    // }, 100);
 
     let directions = {
       37: "left",
